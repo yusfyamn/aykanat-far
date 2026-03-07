@@ -21,7 +21,7 @@ export default function BeforeAfter() {
     if (!isMobile) return;
     const timer = window.setInterval(() => {
       setShowClean((prev) => !prev);
-    }, 2600);
+    }, 4200);
     return () => window.clearInterval(timer);
   }, [isMobile]);
 
@@ -114,7 +114,7 @@ export default function BeforeAfter() {
                 className="absolute inset-0"
                 initial={false}
                 animate={{ opacity: showClean ? 0 : 1 }}
-                transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Image src="/kırık-far-bmw.webp" alt="Kirli far" fill sizes="100vw" className="object-contain" priority />
               </motion.div>
@@ -122,7 +122,7 @@ export default function BeforeAfter() {
                 className="absolute inset-0"
                 initial={false}
                 animate={{ opacity: showClean ? 1 : 0 }}
-                transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Image src="/temiz-far-bmw.webp" alt="Temiz far" fill sizes="100vw" className="object-contain" priority />
               </motion.div>

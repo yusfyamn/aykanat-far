@@ -21,11 +21,13 @@ export default function Hero() {
   const lightOverlayRef = useRef<HTMLDivElement>(null);
   const [introReady, setIntroReady] = useState(false);
   const [isScrollLocked, setIsScrollLocked] = useState(true);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
 
   useEffect(() => {
     if (window.innerWidth < 768) {
       setMobileHeroHeight(window.innerHeight);
+      setIsMobileViewport(true);
     }
   }, []);
 
@@ -110,6 +112,9 @@ export default function Hero() {
     if (isMobile) {
       setIntroReady(true);
       setIsScrollLocked(false);
+      if (lightOverlayRef.current) {
+        gsap.set(lightOverlayRef.current, { opacity: 0 });
+      }
       return;
     }
 
@@ -423,7 +428,7 @@ export default function Hero() {
             className="absolute inset-0 z-16 pointer-events-none"
             style={
               {
-                opacity: 1,
+                opacity: isMobileViewport ? 0 : 1,
                 "--revealRadius": "0vmax",
                 background:
                   "radial-gradient(circle at 50.5% 53.5%, rgba(0,0,0,0) var(--revealRadius), rgba(0,0,0,1) calc(var(--revealRadius) + 2.2vmax))",
@@ -435,7 +440,7 @@ export default function Hero() {
             className="absolute inset-0 z-[17] pointer-events-none"
             style={
               {
-                opacity: 0.12,
+                opacity: isMobileViewport ? 0 : 0.12,
                 mixBlendMode: "screen",
                 filter: "blur(1.8px)",
                 background:
