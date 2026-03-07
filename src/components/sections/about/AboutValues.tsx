@@ -58,7 +58,7 @@ export default function AboutValues() {
             transition={premiumTransition(0, 0.82)}
             className="space-y-3 sm:space-y-4"
           >
-            <h2 className="text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[58px] lg:text-[66px]">
+            <h2 className="text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
               Yaklaşımımız
             </h2>
             <p className="max-w-3xl text-base leading-relaxed text-white/70 sm:text-lg md:text-xl">

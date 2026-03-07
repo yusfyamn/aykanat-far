@@ -50,7 +50,7 @@ export default function WorkshopTextFlow() {
                     className="flex h-full flex-col space-y-5"
                   >
                     <p className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">Atölye Yaklaşımı</p>
-                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em] md:text-[56px]">
+                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]">
                       Far Değişimi Yerine Onarımın Avantajları
                     </h2>
                     <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-white/76 sm:mt-7 sm:text-lg md:text-[1.24rem]">
@@ -96,7 +96,7 @@ export default function WorkshopTextFlow() {
                     transition={premiumTransition(0.1, 0.82)}
                     className="flex h-full flex-col space-y-5"
                   >
-                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em] md:text-[56px]">
+                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]">
                       Uzmanlık ve Ekipman Gereksinimi
                     </h2>
                     <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-white/76 sm:mt-7 sm:text-lg md:text-[1.24rem]">

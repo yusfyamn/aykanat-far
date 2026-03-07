@@ -68,7 +68,7 @@ export default function WorkshopEquipment() {
             <motion.h2
               variants={premiumVariants}
               transition={premiumTransition(0.06, 0.82)}
-              className="mt-3 max-w-[16ch] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[56px]"
+              className="mt-3 max-w-[16ch] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[0.95] tracking-[-0.03em]"
             >
               Teknik ekipman kadar süreç disiplini de önemli.
             </motion.h2>

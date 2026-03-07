@@ -12,7 +12,16 @@ const images = [
 
 export default function WorkshopImageSlider() {
   const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const safeIndex = useMemo(() => ((index % images.length) + images.length) % images.length, [index]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -34,16 +43,16 @@ export default function WorkshopImageSlider() {
                   alt="Far atölyesi görseli"
                   draggable={false}
                   className="absolute inset-0 h-full w-full object-cover"
-                  initial={{ opacity: 0, scale: 1.03, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, scale: 1.03, filter: isMobile ? "blur(0px)" : "blur(8px)" }}
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 1.01, filter: "blur(4px)" }}
+                  exit={{ opacity: 0, scale: 1.01, filter: isMobile ? "blur(0px)" : "blur(4px)" }}
                   transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
                 />
               </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-black/20" />
             </div>
 
-            <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-black/35 px-3 py-2 backdrop-blur-md">
+            <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-black/35 px-3 py-2 md:backdrop-blur-md">
               {images.map((_, i) => (
                 <button
                   key={i}

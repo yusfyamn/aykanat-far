@@ -208,10 +208,10 @@ export default function Gallery({
                   </div>
 
                   {/* Labels */}
-                  <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
+                  <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white md:backdrop-blur-md sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
                     Önce
                   </div>
-                  <div className="absolute right-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md sm:right-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
+                  <div className="absolute right-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white md:backdrop-blur-md sm:right-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
                     Sonra
                   </div>
 

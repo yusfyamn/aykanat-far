@@ -26,7 +26,7 @@ export default function ProcessTimeline() {
     >
       <div className="mx-auto w-full max-w-[1600px] px-1 md:px-2">
         <div className="px-4 sm:px-6 md:px-12 lg:px-16 xl:px-20">
-          <p className="w-fit pb-[0.12em] text-[18px] font-medium leading-[1.12] tracking-tight text-black/45 sm:text-[24px] md:text-[34px] lg:-translate-x-12 xl:-translate-x-20">
+          <p className="w-fit pb-[0.12em] text-[clamp(1rem,1.65vw,2rem)] font-medium leading-[1.12] tracking-tight text-black/45 lg:-translate-x-12 xl:-translate-x-20">
             Hakkımızda
           </p>
 
@@ -43,7 +43,7 @@ export default function ProcessTimeline() {
                 <motion.h2
                   variants={premiumVariants}
                   transition={premiumTransition(0.02, 0.82)}
-                  className="max-w-[18ch] pb-[0.14em] text-[clamp(1.75rem,8.2vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] sm:max-w-none md:text-[58px] lg:text-[66px]"
+                  className="max-w-[18ch] pb-[0.14em] text-[clamp(1.75rem,8.2vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] sm:max-w-none"
                 >
                   Far restorasyonunda net süreç ve premium sonuç için buradayız.
                 </motion.h2>
@@ -51,7 +51,7 @@ export default function ProcessTimeline() {
                 <motion.p
                   variants={premiumVariants}
                   transition={premiumTransition(0.14, 0.78)}
-                  className="mt-4 max-w-[44ch] text-[15px] leading-relaxed text-black/65 sm:mt-5 sm:text-base md:max-w-none md:text-[20px]"
+                  className="mt-4 max-w-[44ch] text-[clamp(0.95rem,1.25vw,1.22rem)] leading-relaxed text-black/65 sm:mt-5 md:max-w-none"
                 >
                   Gereksiz adımları çıkarıp, farın ihtiyacı olan işlemi doğru sırada
                   uyguluyoruz. Sonuç daha berrak, daha dengeli ve daha uzun ömürlü
@@ -81,10 +81,10 @@ export default function ProcessTimeline() {
                     transition={premiumTransition(index * 0.08, 0.72)}
                     className="border-b border-black/10 py-5 sm:py-6 md:py-7"
                   >
-                    <p className="text-[clamp(2.2rem,12vw,3.4rem)] font-semibold leading-none tracking-[-0.03em] md:text-[54px]">
+                    <p className="text-[clamp(2rem,5.2vw,3.2rem)] font-semibold leading-none tracking-[-0.03em]">
                       {item.value}
                     </p>
-                    <p className="mt-1 text-[17px] tracking-tight text-black/56 sm:text-[19px] md:text-[24px]">
+                    <p className="mt-1 text-[clamp(1rem,1.75vw,1.42rem)] tracking-tight text-black/56">
                       {item.label}
                     </p>
                   </motion.div>

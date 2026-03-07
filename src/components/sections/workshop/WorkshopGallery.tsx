@@ -58,7 +58,7 @@ export default function WorkshopGallery() {
             <p className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">
               Atölyeden
             </p>
-            <h2 className="max-w-[15ch] text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em] md:text-[58px] lg:text-[66px]">
+            <h2 className="max-w-[15ch] text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
               Kontrollü süreç, temiz çalışma, net teslim.
             </h2>
             <p className="max-w-[58ch] text-sm leading-relaxed text-white/72 sm:text-base md:text-lg">

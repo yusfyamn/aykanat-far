@@ -1,106 +1,91 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePreloader } from "@/context/PreloaderContext";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { usePreloader } from "@/context/PreloaderContext";
 
 export default function Preloader() {
   const { isPreloaderDone, setIsPreloaderDone } = usePreloader();
-  const [progress, setProgress] = useState(0);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const [progress, setProgress] = useState(0);
+  const finishedRef = useRef(false);
 
   useEffect(() => {
-    if (isPreloaderDone) {
-      document.body.style.overflow = "";
-    }
-  }, [isPreloaderDone]);
-
-  useEffect(() => {
-    if (isPreloaderDone) return;
-
     if (!isHomePage) {
-      // Defer state update to avoid React 18 component render cycle clash
-      setTimeout(() => {
-        setIsPreloaderDone(true);
-      }, 0);
+      setIsPreloaderDone(true);
+      document.body.style.overflow = "";
       return;
     }
 
-    // Disable scroll while loading
-    document.body.style.overflow = "hidden";
-
-    let hasLoaded = document.readyState === "complete";
-    if (!hasLoaded) {
-      window.addEventListener("load", () => {
-        hasLoaded = true;
-      });
+    if (isPreloaderDone) {
+      document.body.style.overflow = "";
+      return;
     }
 
-    let currentProgress = 0;
-    const duration = 2500; // Premium minimum loading time
-    const startTime = Date.now();
-    const hardStopTimer = setTimeout(() => {
-      setIsPreloaderDone(true);
-      document.body.style.overflow = "";
-    }, 4500);
+    document.body.style.overflow = "hidden";
+    finishedRef.current = false;
+    setProgress(0);
+    let rafId = 0;
+    let hasLoaded = document.readyState === "complete";
+    let visualProgress = 0;
 
-    const updateProgress = () => {
-      const elapsed = Date.now() - startTime;
-      
-      // Calculate target progress taking both time and actual load into account
-      let targetProgress = (elapsed / duration) * 100;
-      
-      // Keep pushing forward even if load event missed, just slowly
-      if (!hasLoaded && targetProgress > 95) {
-        targetProgress = 95 + (elapsed % 1000) * 0.005; // Tiny fluctuations to seem active
-        
-        // Force completion after maximum 8 seconds
-        if (elapsed > 8000) {
-          hasLoaded = true;
-        }
+    const finish = () => {
+      if (finishedRef.current) return;
+      finishedRef.current = true;
+      setProgress(100);
+      setTimeout(() => {
+        setIsPreloaderDone(true);
+        document.body.style.overflow = "";
+      }, 420);
+    };
+
+    const minDuration = 2100;
+    const maxDuration = 5600;
+    const start = performance.now();
+    const onLoad = () => {
+      hasLoaded = true;
+    };
+    window.addEventListener("load", onLoad, { once: true });
+
+    const tick = (now: number) => {
+      if (finishedRef.current) return;
+      const elapsed = now - start;
+      const normalized = Math.min(1, elapsed / minDuration);
+      const eased = 1 - Math.pow(1 - normalized, 2.2);
+
+      let target = 8 + eased * 84; // 8 -> 92
+      if (hasLoaded && elapsed > minDuration * 0.74) {
+        target = 100;
       }
-      
-      // Once duration passes and loaded, push to 100
-      if (hasLoaded && elapsed > duration) {
-        targetProgress = 100;
+      if (!hasLoaded && elapsed > maxDuration - 700) {
+        target = 100;
       }
 
-      // Smooth easing towards target
-      currentProgress += (targetProgress - currentProgress) * 0.12;
+      // Enter a fast, deterministic finish phase once near the end.
+      const nearEnd = target >= 100 || visualProgress >= 96;
+      visualProgress += (target - visualProgress) * (nearEnd ? 0.34 : 0.12);
+      const next = Math.min(100, Math.floor(visualProgress));
+      setProgress(next);
 
-      // Ensure it finishes if stuck near the end
-      if (currentProgress >= 98 && hasLoaded) {
-        currentProgress = 100;
-      }
-
-      // Handle completion
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        setProgress(100);
-        
-        // Wait at 100% for a brief moment before fading out
-        setTimeout(() => {
-          setIsPreloaderDone(true);
-          document.body.style.overflow = "";
-        }, 600);
-        clearTimeout(hardStopTimer);
+      if (next >= 100 || (next >= 99 && nearEnd) || elapsed >= maxDuration || elapsed >= minDuration + 1400) {
+        finish();
         return;
       }
-
-      setProgress(Math.floor(currentProgress));
-      requestAnimationFrame(updateProgress);
+      rafId = requestAnimationFrame(tick);
     };
 
-    const animFrame = requestAnimationFrame(updateProgress);
+    const hardStopTimer = window.setTimeout(finish, maxDuration);
+    rafId = requestAnimationFrame(tick);
 
     return () => {
-      cancelAnimationFrame(animFrame);
-      clearTimeout(hardStopTimer);
+      cancelAnimationFrame(rafId);
+      window.clearTimeout(hardStopTimer);
+      window.removeEventListener("load", onLoad);
       document.body.style.overflow = "";
     };
-  }, [setIsPreloaderDone, isHomePage, isPreloaderDone]);
+  }, [isHomePage, isPreloaderDone, setIsPreloaderDone]);
 
   return (
     <AnimatePresence>
@@ -108,34 +93,29 @@ export default function Preloader() {
         <motion.div
           key="preloader-overlay"
           initial={{ y: 0 }}
-          exit={{ 
+          exit={{
             y: "-100%",
-            transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } 
+            transition: { duration: 0.78, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-[9999] bg-dark flex flex-col justify-between p-6 sm:p-10 md:p-16 lg:p-20 overflow-hidden"
+          className="fixed inset-0 z-[9999] flex flex-col justify-between overflow-hidden bg-dark p-6 sm:p-10 md:p-16 lg:p-20"
         >
           <div />
-
-          {/* Bottom section with progress */}
-          <div className="flex flex-col justify-end w-full gap-4 md:gap-8">
-            {/* Minimal Progress Bar */}
-            <div className="w-full h-[1px] bg-white/10 relative overflow-hidden">
-              <motion.div 
-                className="absolute top-0 left-0 h-full bg-white origin-left"
+          <div className="flex w-full flex-col justify-end gap-4 md:gap-8">
+            <div className="relative h-[1px] w-full overflow-hidden bg-white/10">
+              <motion.div
+                className="absolute left-0 top-0 h-full origin-left bg-white"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: "linear", duration: 0.1 }}
               />
             </div>
-            
-            {/* Large Percentage Text */}
-            <div className="flex justify-between items-end w-full">
+            <div className="flex w-full items-end justify-between">
               <div />
               <div className="overflow-hidden">
                 <motion.div
                   initial={{ y: "100%" }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-                  className="font-satoshi text-[22vw] md:text-[14vw] font-medium leading-[0.8] tracking-tighter text-white"
+                  transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+                  className="font-satoshi text-[22vw] font-medium leading-[0.8] tracking-tighter text-white md:text-[14vw]"
                 >
                   {Math.min(progress, 100)}
                 </motion.div>

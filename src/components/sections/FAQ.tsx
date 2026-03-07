@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   PREMIUM_EASE,
   PREMIUM_VIEWPORT_AMOUNT,
@@ -41,6 +41,15 @@ const faqs = [
 
 export default function FAQ() {
   const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
   const isInView = useInView(ref, {
     once: true,
     margin: PREMIUM_VIEWPORT_MARGIN,
@@ -51,7 +60,7 @@ export default function FAQ() {
   return (
     <section id="faq" ref={ref} className="bg-white py-20 sm:py-24 md:py-28">
       <div className="mx-auto w-full max-w-[1600px] px-1 md:px-2">
-        <div className="px-4 py-8 sm:px-5 sm:py-9 md:px-10 md:py-14 lg:px-16 xl:px-20">
+        <div className="px-4 py-8 sm:px-5 sm:py-9 md:px-10 md:py-14 lg:px-10 xl:px-12">
           <div className="grid gap-8 sm:gap-9 lg:grid-cols-[minmax(320px,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
             <motion.div
               variants={premiumVariants}
@@ -109,9 +118,9 @@ export default function FAQ() {
                   <AnimatePresence>
                     {openIndex === index && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0, filter: "blur(8px)" }}
+                        initial={{ height: 0, opacity: 0, filter: isMobile ? "blur(0px)" : "blur(8px)" }}
                         animate={{ height: "auto", opacity: 1, filter: "blur(0px)" }}
-                        exit={{ height: 0, opacity: 0, filter: "blur(8px)" }}
+                        exit={{ height: 0, opacity: 0, filter: isMobile ? "blur(0px)" : "blur(8px)" }}
                         transition={{
                           duration: 0.52,
                           ease: PREMIUM_EASE,

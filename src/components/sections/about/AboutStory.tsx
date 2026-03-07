@@ -73,7 +73,7 @@ export default function AboutStory() {
                 <p className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">
                   Hikayemiz
                 </p>
-                <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em] md:text-[56px]">
+                <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]">
                   Neden değişim yerine restorasyon?
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-white/76 sm:mt-7 sm:text-lg md:text-[1.24rem]">

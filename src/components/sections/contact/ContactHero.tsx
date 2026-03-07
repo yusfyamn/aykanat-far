@@ -13,6 +13,7 @@ const trustItems = [
 
 export default function ContactHero() {
   const [introReady, setIntroReady] = useState(false);
+  const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,10 +23,16 @@ export default function ContactHero() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setMobileHeroHeight(window.innerHeight);
+    }
+  }, []);
+
   return (
     <section
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-dark pt-20 max-[430px]:pt-16 max-[393px]:pt-14"
-      style={{ minHeight: "100dvh" }}
+      className="relative flex w-full items-center overflow-hidden bg-dark pt-20 max-[430px]:pt-16 max-[393px]:pt-14 md:min-h-screen"
+      style={mobileHeroHeight ? { height: `${mobileHeroHeight}px` } : { minHeight: "100dvh" }}
     >
       <div
         className="absolute inset-0"
@@ -36,7 +43,7 @@ export default function ContactHero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/80" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 pb-16 max-[430px]:px-3 max-[430px]:pb-12 max-[393px]:px-2.5 max-[393px]:pb-11 sm:px-6 sm:pb-20 md:px-12 md:pb-24 lg:px-16 xl:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 pb-16 max-[430px]:px-3 max-[430px]:pb-12 max-[393px]:px-2.5 max-[393px]:pb-11 sm:px-6 sm:pb-20 md:px-8 md:pb-24 lg:px-10 xl:px-12">
         <motion.div
           className="max-w-[820px] space-y-5 max-[430px]:space-y-4 sm:space-y-6"
           initial={premiumReveal.initial}
@@ -80,7 +87,7 @@ export default function ContactHero() {
           {trustItems.map((item) => (
             <div
               key={item.label}
-              className="rounded-2xl border border-white/12 bg-white/[0.04] px-5 py-4 backdrop-blur-sm max-[430px]:rounded-xl max-[430px]:px-4 max-[430px]:py-3 sm:px-6"
+              className="rounded-2xl border border-white/12 bg-white/[0.04] px-5 py-4 md:backdrop-blur-sm max-[430px]:rounded-xl max-[430px]:px-4 max-[430px]:py-3 sm:px-6"
             >
               <p className="text-3xl font-semibold leading-none tracking-[-0.03em] max-[430px]:text-2xl sm:text-4xl">
                 {item.value}

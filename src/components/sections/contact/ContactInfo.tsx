@@ -43,7 +43,7 @@ export default function ContactInfo() {
       </div>
 
       <div className="relative z-40 mx-auto w-full max-w-[1600px] px-3 pb-8 pt-4 sm:px-6 md:flex md:h-full md:items-center md:px-8 lg:px-12 xl:px-14">
-        <div className="w-full max-w-[980px] rounded-[20px] border border-white/[0.12] bg-white/[0.02] px-3 pb-0 pt-2 shadow-[0_20px_58px_rgba(0,0,0,0.28)] backdrop-blur-[10px] sm:px-5 sm:pt-3 md:rounded-[24px]">
+        <div className="w-full max-w-[980px] rounded-[20px] border border-white/[0.12] bg-white/[0.02] px-3 pb-0 pt-2 shadow-[0_20px_58px_rgba(0,0,0,0.28)] md:backdrop-blur-[10px] sm:px-5 sm:pt-3 md:rounded-[24px]">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-[1.02fr_1fr] md:items-end md:gap-5">
             <div className="relative h-[280px] w-full overflow-hidden sm:h-[320px] md:h-[360px]">
               <div className="absolute inset-x-0 -bottom-14 h-[272px] overflow-hidden sm:-bottom-8 md:bottom-0">
@@ -92,7 +92,7 @@ export default function ContactInfo() {
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-3 z-30 hidden px-4 sm:px-6 md:bottom-4 md:block md:px-8">
-        <div className="pointer-events-auto mx-auto flex w-full max-w-[1600px] flex-col items-start justify-between gap-2 rounded-[14px] border border-white/[0.08] bg-white/[0.01] px-3.5 py-2.5 text-white/62 backdrop-blur-[10px] sm:flex-row sm:items-center sm:px-4">
+        <div className="pointer-events-auto mx-auto flex w-full max-w-[1600px] flex-col items-start justify-between gap-2 rounded-[14px] border border-white/[0.08] bg-white/[0.01] px-3.5 py-2.5 text-white/62 md:backdrop-blur-[10px] sm:flex-row sm:items-center sm:px-4">
           <p className="text-[11px] sm:text-xs">© 2026 Restore. Tüm hakları saklıdır.</p>
           <div className="flex items-center gap-3 text-[11px] sm:gap-4 sm:text-xs">
             <a href="/gizlilik-politikasi" className="transition-colors hover:text-white">

@@ -7,6 +7,7 @@ import { premiumReveal, premiumTransition } from "@/lib/premiumMotion";
 
 export default function AboutHero() {
   const [introReady, setIntroReady] = useState(false);
+  const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,10 +17,16 @@ export default function AboutHero() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setMobileHeroHeight(window.innerHeight);
+    }
+  }, []);
+
   return (
     <section
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-dark pt-20"
-      style={{ minHeight: "100svh" }}
+      className="relative flex w-full items-center overflow-hidden bg-dark pt-20 md:min-h-screen"
+      style={mobileHeroHeight ? { height: `${mobileHeroHeight}px` } : undefined}
     >
       <div className="absolute inset-0">
         <Image
@@ -47,7 +54,7 @@ export default function AboutHero() {
           <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-white/40 sm:text-xs">
             Hakkımızda
           </p>
-          <h1 className="max-w-[14ch] text-[clamp(1.8rem,8.2vw,3.95rem)] font-semibold leading-[1.04] tracking-[-0.03em] md:text-[60px]">
+          <h1 className="max-w-[14ch] text-[clamp(1.8rem,8.2vw,3.95rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
             <span className="inline-block pb-[0.18em]">Far restorasyonunda premium sonuç.</span>
           </h1>
           <p className="max-w-[29ch] text-[0.92rem] leading-relaxed text-white/84 sm:max-w-[65ch] sm:text-xl md:text-[1.3rem]">

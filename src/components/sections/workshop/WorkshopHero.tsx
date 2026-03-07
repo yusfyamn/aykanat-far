@@ -14,14 +14,31 @@ const images = [
 export default function WorkshopHero() {
   const [index, setIndex] = useState(0);
   const [introReady, setIntroReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
   const safeIndex = useMemo(() => ((index % images.length) + images.length) % images.length, [index]);
 
   useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setMobileHeroHeight(window.innerHeight);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 4200);
     return () => clearInterval(timer);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,7 +48,10 @@ export default function WorkshopHero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-dark pt-20" style={{ minHeight: "100svh" }}>
+    <section
+      className="relative flex w-full items-center overflow-hidden bg-dark pt-20 md:min-h-screen"
+      style={mobileHeroHeight ? { height: `${mobileHeroHeight}px` } : undefined}
+    >
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
           <motion.img
@@ -60,7 +80,7 @@ export default function WorkshopHero() {
           transition={premiumTransition(0, 0.96)}
         >
           <p className="text-[11px] uppercase tracking-[0.22em] text-white/42 sm:text-xs">Far Atölyesi</p>
-          <h1 className="max-w-[14ch] pb-[0.1em] text-[clamp(1.8rem,8.2vw,3.95rem)] font-semibold leading-[1.04] tracking-[-0.03em] md:text-[60px]">
+          <h1 className="max-w-[14ch] pb-[0.1em] text-[clamp(1.8rem,8.2vw,3.95rem)] font-semibold leading-[1.04] tracking-[-0.03em]">
             Far Onarım Atölyesi
           </h1>
           <p className="max-w-[29ch] text-[0.92rem] leading-relaxed text-white/84 sm:max-w-[65ch] sm:text-xl md:text-[1.3rem]">
@@ -70,7 +90,7 @@ export default function WorkshopHero() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-5 left-1/2 z-20 flex w-[min(1280px,92vw)] -translate-x-1/2 gap-2 rounded-full bg-black/28 px-3 py-2 backdrop-blur-md">
+      <div className="absolute bottom-5 left-1/2 z-20 flex w-[min(1280px,92vw)] -translate-x-1/2 gap-2 rounded-full bg-black/28 px-3 py-2 md:backdrop-blur-md">
         {images.map((_, i) => (
           <button
             key={i}

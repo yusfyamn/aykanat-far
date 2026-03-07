@@ -78,7 +78,7 @@ export default function ContactForm() {
       ref={sectionRef}
       className="bg-white pb-14 pt-16 text-[#101010] max-[430px]:pb-12 max-[430px]:pt-13 max-[393px]:pb-11 max-[393px]:pt-12 sm:pb-16 sm:pt-20 md:pb-20 md:pt-24"
     >
-      <div className="mx-auto w-full max-w-[1600px] px-4 max-[430px]:px-3 max-[393px]:px-2.5 sm:px-6 md:px-12 lg:px-16 xl:px-20">
+      <div className="mx-auto w-full max-w-[1600px] px-4 max-[430px]:px-3 max-[393px]:px-2.5 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         <motion.div
           variants={premiumStagger(0.12, 0.1)}
           initial="hidden"
@@ -96,7 +96,7 @@ export default function ContactForm() {
             <motion.h2
               variants={premiumVariants}
               transition={premiumTransition(0.06, 0.82)}
-              className="mt-3 max-w-[16ch] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[0.95] tracking-[-0.03em] max-[430px]:text-[clamp(1.7rem,9.1vw,2.3rem)] max-[393px]:text-[clamp(1.56rem,8.9vw,2.08rem)] max-[375px]:text-[clamp(1.48rem,8.7vw,1.95rem)] md:text-[56px]"
+              className="mt-3 max-w-[16ch] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[0.95] tracking-[-0.03em] max-[430px]:text-[clamp(1.7rem,9.1vw,2.3rem)] max-[393px]:text-[clamp(1.56rem,8.9vw,2.08rem)] max-[375px]:text-[clamp(1.48rem,8.7vw,1.95rem)]"
             >
               Kisa form, hizli geri donus.
             </motion.h2>

@@ -51,7 +51,7 @@ export default function PriceAdvantages() {
       ref={sectionRef}
       className="bg-dark pb-12 pt-16 text-white max-[430px]:pb-10 max-[430px]:pt-12 max-[393px]:pb-9 max-[393px]:pt-11 sm:pb-14 sm:pt-20 md:pb-16 md:pt-24"
     >
-      <div className="mx-auto w-full max-w-[1600px] px-4 max-[430px]:px-3 max-[393px]:px-2.5 sm:px-6 md:px-12 lg:px-16 xl:px-20">
+      <div className="mx-auto w-full max-w-[1600px] px-4 max-[430px]:px-3 max-[393px]:px-2.5 sm:px-6 md:px-8 lg:px-10 xl:px-12">
         <motion.div
           variants={premiumStagger(0.12, 0.1)}
           initial="hidden"
@@ -66,7 +66,7 @@ export default function PriceAdvantages() {
             <p className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">
               Maliyet Perspektifi
             </p>
-            <h2 className="max-w-[15ch] text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em] max-[430px]:max-w-[16ch] max-[430px]:text-[clamp(1.72rem,9vw,2.34rem)] max-[393px]:text-[clamp(1.58rem,8.9vw,2.16rem)] max-[375px]:text-[clamp(1.5rem,8.7vw,2.02rem)] md:text-[58px] lg:text-[66px]">
+            <h2 className="max-w-[15ch] text-[clamp(2.1rem,10vw,3.8rem)] font-semibold leading-[0.95] tracking-[-0.03em] max-[430px]:max-w-[16ch] max-[430px]:text-[clamp(1.72rem,9vw,2.34rem)] max-[393px]:text-[clamp(1.58rem,8.9vw,2.16rem)] max-[375px]:text-[clamp(1.5rem,8.7vw,2.02rem)]">
               Doğru müdahale, toplam maliyeti ciddi şekilde düşürür.
             </h2>
             <p className="max-w-[58ch] text-sm leading-relaxed text-white/72 max-[430px]:text-[13px] max-[393px]:text-[12.5px] sm:text-base md:text-lg">

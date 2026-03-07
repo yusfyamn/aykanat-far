@@ -62,7 +62,7 @@ export default function AboutCTA() {
                 <motion.h2
                   variants={premiumVariants}
                   transition={premiumTransition(0.08, 0.82)}
-                  className="mx-auto max-w-[14ch] pb-[0.1em] text-center text-[clamp(2rem,9vw,3.4rem)] font-semibold leading-[1.08] tracking-[-0.03em] max-[430px]:max-w-none max-[430px]:text-[clamp(1.9rem,8.5vw,2.4rem)] max-[393px]:text-[clamp(1.75rem,8.5vw,2.2rem)] max-[375px]:text-[clamp(1.65rem,8.5vw,2.1rem)] md:text-[56px]"
+                  className="mx-auto max-w-[14ch] pb-[0.1em] text-center text-[clamp(2rem,9vw,3.4rem)] font-semibold leading-[1.08] tracking-[-0.03em] max-[430px]:max-w-none max-[430px]:text-[clamp(1.9rem,8.5vw,2.4rem)] max-[393px]:text-[clamp(1.75rem,8.5vw,2.2rem)] max-[375px]:text-[clamp(1.65rem,8.5vw,2.1rem)]"
                 >
                   Farlarınız için doğru planı birlikte çıkaralım.
                 </motion.h2>

@@ -15,6 +15,15 @@ const menuLinks = [
 export default function Navbar() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -54,13 +63,13 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             onClick={() => setIsMenuOpen(false)}
-            className="fixed inset-0 z-40 bg-black/55 backdrop-blur-[6px]"
+            className="fixed inset-0 z-40 bg-black/55 md:backdrop-blur-[6px]"
           />
         )}
       </AnimatePresence>
 
       <motion.header
-        className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 max-[430px]:px-3 max-[393px]:px-2.5 sm:px-5 md:px-8"
+        className="fixed left-0 right-0 top-0 z-50 flex justify-center px-[clamp(10px,2.1vw,32px)]"
         initial={premiumReveal.initial}
         animate={premiumReveal.animate}
         transition={premiumTransition(0, 0.9)}
@@ -69,16 +78,16 @@ export default function Navbar() {
         ref={containerRef}
         className={`relative w-full overflow-hidden ${navShape}`}
         style={{
-          maxWidth: "1280px",
+          maxWidth: "1240px",
           backgroundColor: shouldShowSurface ? "hsla(0, 0%, 8%, 0.94)" : "transparent",
-          backdropFilter: shouldShowSurface ? "blur(16px) saturate(180%)" : "none",
-          WebkitBackdropFilter: shouldShowSurface ? "blur(16px) saturate(180%)" : "none",
+          backdropFilter: shouldShowSurface && !isMobile ? "blur(16px) saturate(180%)" : "none",
+          WebkitBackdropFilter: shouldShowSurface && !isMobile ? "blur(16px) saturate(180%)" : "none",
           border: shouldShowSurface ? `1px solid ${surfaceBorder}` : "none",
-          paddingLeft: "clamp(14px, 3.2vw, 32px)",
-          paddingRight: "clamp(14px, 3.2vw, 32px)",
+          paddingLeft: "clamp(14px, 2.4vw, 30px)",
+          paddingRight: "clamp(14px, 2.4vw, 30px)",
         }}
       >
-        <div className="relative flex items-center justify-between py-2.5 sm:py-3 md:py-4">
+        <div className="relative flex items-center justify-between py-2.5 sm:py-3 md:py-3.5 lg:py-4">
           
           {/* Hamburger Menu (Mobile: Right, Desktop: Left) */}
           <motion.button
@@ -111,7 +120,7 @@ export default function Navbar() {
           {/* Logo (Mobile: Left, Desktop: Center Absolute) */}
           <motion.a 
             href="/" 
-            className="z-10 flex items-center justify-start font-satoshi text-sm font-bold tracking-tight order-1 md:pointer-events-none md:absolute md:inset-0 md:justify-center sm:text-base md:text-lg"
+            className="z-10 flex items-center justify-start font-satoshi text-sm font-bold tracking-tight order-1 md:pointer-events-none md:absolute md:inset-0 md:justify-center sm:text-base md:text-[1.02rem] lg:text-lg"
             initial={false}
             animate={premiumReveal.animate}
             transition={premiumTransition(0.02, 0.74)}
@@ -157,9 +166,9 @@ export default function Navbar() {
               <motion.div
                 initial={premiumReveal.initial}
                 animate={premiumReveal.animate}
-                exit={{ opacity: 0, filter: "blur(10px)", clipPath: "inset(0 100% 100% 0)", scale: 1.01 }}
+                exit={isMobile ? { opacity: 0, clipPath: "inset(0 100% 100% 0)", scale: 1.01 } : { opacity: 0, filter: "blur(10px)", clipPath: "inset(0 100% 100% 0)", scale: 1.01 }}
                 transition={premiumTransition(0.1, 1.12)}
-                className="max-h-[calc(100dvh-88px)] overflow-y-auto px-4 pb-7 pt-4 max-[430px]:max-h-[calc(100dvh-78px)] max-[430px]:px-3 max-[430px]:pb-6 max-[430px]:pt-3.5 max-[393px]:px-2.5 sm:px-5 md:max-h-[68vh] md:px-8 md:pb-10 md:pt-6"
+              className="max-h-[calc(100dvh-88px)] overflow-y-auto px-4 pb-7 pt-4 max-[430px]:max-h-[calc(100dvh-78px)] max-[430px]:px-3 max-[430px]:pb-6 max-[430px]:pt-3.5 max-[393px]:px-2.5 sm:px-5 md:max-h-[68vh] md:px-6 md:pb-9 md:pt-5 lg:px-8 lg:pb-10 lg:pt-6"
               >
                 <div className="space-y-1.5 md:space-y-2">
                   {menuLinks.map((link, index) => (
@@ -177,7 +186,7 @@ export default function Navbar() {
                       >
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span className="block text-2xl font-semibold tracking-tight max-[430px]:text-[1.35rem] max-[393px]:text-[1.22rem] max-[375px]:text-[1.12rem] sm:text-3xl md:text-5xl lg:text-6xl">
+                      <span className="block text-2xl font-semibold tracking-tight max-[430px]:text-[1.35rem] max-[393px]:text-[1.22rem] max-[375px]:text-[1.12rem] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                         {link.label}
                       </span>
                     </motion.a>

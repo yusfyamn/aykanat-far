@@ -125,9 +125,9 @@ export default function Hero() {
         };
         if (Object.values(els).some((el) => !el)) return;
         const isMobile = window.matchMedia("(max-width: 767px)").matches;
-        const zoomStrength = isMobile ? 4.8 : 6;
-        const blurMax = isMobile ? 14 : 20;
-        const pinLength = isMobile ? 1.25 : 1.5;
+        const zoomStrength = isMobile ? 3.9 : 6;
+        const blurMax = isMobile ? 8 : 20;
+        const pinLength = isMobile ? 1.15 : 1.5;
         const mission1Start = isMobile ? 0.46 : 0.5;
         const mission2Start = isMobile ? 0.57 : 0.6;
 
@@ -156,11 +156,8 @@ export default function Hero() {
           onUpdate: (self) => {
             const p = self.progress;
 
-            // Zoom into headlight
+            // Zoom + blur on image as we approach white.
             const scale = 1 + p * zoomStrength;
-            gsap.set(els.image, { scale });
-
-            // Blur on image as we approach white - starts earlier
             const imageBlur = p <= 0.15 ? 0 : ((p - 0.15) / 0.85) * blurMax;
             gsap.set(els.image, { 
               scale,
@@ -339,13 +336,13 @@ export default function Hero() {
 
           <div
             ref={headerRef}
-            className="absolute inset-0 z-10 flex flex-col justify-between p-5 pb-14 will-change-transform sm:p-6 sm:pb-16 md:p-16 md:pb-24"
+            className="absolute inset-0 z-10 flex flex-col justify-between px-[clamp(16px,3.2vw,56px)] pb-[clamp(56px,7vw,112px)] pt-[clamp(20px,3vw,40px)] will-change-transform"
             style={{ transformOrigin: "center center" }}
           >
-            <div className="mt-16 flex items-start justify-end sm:mt-20 md:mt-24 md:justify-end">
+            <div className="mt-[clamp(64px,10vh,132px)] flex items-start justify-end">
               {/* Top Right Heading (Mobile: Top Right, Desktop: Top Right) */}
               <motion.h1
-                className="max-w-[11ch] pb-2 text-right text-[clamp(2rem,10vw,3.5rem)] font-medium leading-[0.95] tracking-tighter text-white sm:text-[clamp(3rem,10vw,5.1rem)] md:text-right md:mr-12 md:max-w-none md:pb-0 md:text-7xl md:leading-[0.85] lg:text-8xl xl:text-9xl"
+                className="max-w-[11ch] pb-2 text-right text-[clamp(1.95rem,6.3vw,5.8rem)] font-medium leading-[0.9] tracking-tighter text-white md:mr-[clamp(10px,2.2vw,44px)] md:max-w-none md:pb-0"
                 style={{ fontFamily: "Satoshi, sans-serif" }}
                 initial={premiumReveal.initial}
                 animate={introReady ? premiumReveal.animate : premiumReveal.initial}
@@ -355,17 +352,17 @@ export default function Hero() {
               </motion.h1>
             </div>
             {/* Bottom section layout container */}
-            <div className="mb-16 flex flex-col justify-end gap-3 sm:mb-20 sm:gap-6 md:mb-28 md:items-start md:gap-4 md:flex-col">
+            <div className="mb-[clamp(38px,5.2vh,90px)] flex flex-col justify-end gap-3 sm:gap-4 md:items-start md:gap-5 md:flex-col">
               
               {/* Bottom Left Heading */}
               <motion.div
-                className="w-full text-left md:order-1 md:ml-16 md:max-w-none md:text-left"
+                className="w-full text-left md:order-1 md:ml-[clamp(10px,2.8vw,56px)] md:max-w-none md:text-left"
                 initial={premiumReveal.initial}
                 animate={introReady ? premiumReveal.animate : premiumReveal.initial}
                 transition={premiumTransition(-0.08, 1.08)}
               >
                 <h2
-                  className="pr-0 pb-2 text-[clamp(2rem,10vw,3.5rem)] font-medium leading-[0.95] tracking-tighter text-white sm:pr-2 sm:text-[clamp(2.9rem,10vw,5.4rem)] md:pr-4 md:pb-0 md:text-7xl md:leading-[0.85] lg:text-8xl xl:text-9xl"
+                  className="pr-0 pb-2 text-[clamp(1.95rem,6.3vw,5.8rem)] font-medium leading-[0.9] tracking-tighter text-white md:pr-2 md:pb-0"
                   style={{ fontFamily: "Satoshi, sans-serif" }}
                 >
                   Geceye<br />İmza Netlik
@@ -374,14 +371,14 @@ export default function Hero() {
 
               {/* Description (Mobile: Bottom Left, Desktop: Bottom Left under heading) */}
               <motion.div
-                className="max-w-[280px] text-left md:order-2 md:ml-16 md:max-w-[620px] md:text-left"
+                className="max-w-[300px] text-left md:order-2 md:ml-[clamp(10px,2.8vw,56px)] md:max-w-[min(88vw,620px)] md:text-left"
                 initial={premiumReveal.initial}
                 animate={introReady ? premiumReveal.animate : premiumReveal.initial}
                 transition={premiumTransition(-0.02, 1.08)}
               >
-                <p className="mb-4 font-satoshi text-xs leading-relaxed text-white/70 sm:text-base md:mb-5 md:text-2xl md:text-white/92">
-                  <span className="block whitespace-nowrap">Çünkü biz biliyoruz ki; doğru aydınlatma,</span>
-                  <span className="block whitespace-nowrap">güvenli bir yolculuğun başlangıcıdır.</span>
+                <p className="mb-4 font-satoshi text-[clamp(0.95rem,1.55vw,1.9rem)] leading-relaxed text-white/78 md:mb-5 md:text-white/92">
+                  <span className="block">Çünkü biz biliyoruz ki; doğru aydınlatma,</span>
+                  <span className="block">güvenli bir yolculuğun başlangıcıdır.</span>
                 </p>
               </motion.div>
             </div>
@@ -389,7 +386,7 @@ export default function Hero() {
 
           <motion.div
             ref={hintRef}
-            className="pointer-events-none absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2 md:bottom-10"
+            className="pointer-events-none absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2 md:bottom-8 lg:bottom-10"
             initial={premiumReveal.initial}
             animate={introReady ? premiumReveal.animate : premiumReveal.initial}
             transition={premiumTransition(0.08, 0.92)}
@@ -432,13 +429,13 @@ export default function Hero() {
           {/* Mission text on white background */}
           <div
             ref={missionRef}
-            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-5 py-12 sm:px-6 sm:py-14 md:px-16 md:py-24 lg:px-24"
+            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-[clamp(16px,3.2vw,56px)] py-[clamp(42px,7vh,96px)]"
             style={{ opacity: 1 }}
           >
-            <div className="w-full max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-14 space-y-9 md:space-y-11">
+            <div className="w-full max-w-[1600px] space-y-8 md:space-y-10">
               <p
                 ref={mission1Ref}
-                className="text-[1.25rem] sm:text-2xl md:text-[clamp(1.3rem,2.55vw,2.85rem)] font-medium leading-[1.4] md:leading-[1.22] tracking-normal md:tracking-[-0.02em] text-[#111111]"
+                className="text-[clamp(1.22rem,2.45vw,2.85rem)] font-medium leading-[1.24] tracking-[-0.015em] text-[#111111]"
                 style={{
                   opacity: 0,
                   fontFamily: "Satoshi, sans-serif",
@@ -451,7 +448,7 @@ export default function Hero() {
 
               <p
                 ref={mission2Ref}
-                className="text-[1.25rem] sm:text-2xl md:text-[clamp(1.3rem,2.55vw,2.85rem)] font-medium leading-[1.4] md:leading-[1.22] tracking-normal md:tracking-[-0.02em] text-[#111111]"
+                className="text-[clamp(1.22rem,2.45vw,2.85rem)] font-medium leading-[1.24] tracking-[-0.015em] text-[#111111]"
                 style={{
                   opacity: 0,
                   fontFamily: "Satoshi, sans-serif",
