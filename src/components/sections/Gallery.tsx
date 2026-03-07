@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   PREMIUM_VIEWPORT_AMOUNT,
   PREMIUM_VIEWPORT_MARGIN,
@@ -131,10 +132,12 @@ export default function Gallery({
                 {/* Content */}
                 <div className="relative w-full h-full select-none">
                   {/* After image (background) */}
-                  <img
+                  <Image
                     src={activeItem.after}
                     alt={`${activeItem.title} - Sonra`}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 70vw"
+                    className="absolute inset-0 h-full w-full object-cover"
                     draggable={false}
                   />
                   
@@ -143,10 +146,12 @@ export default function Gallery({
                     className="absolute inset-0 overflow-hidden"
                     style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                   >
-                    <img
+                    <Image
                       src={activeItem.before}
                       alt={`${activeItem.title} - Önce`}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 640px) 100vw, 70vw"
+                      className="absolute inset-0 h-full w-full object-cover"
                       draggable={false}
                     />
                   </div>
@@ -244,9 +249,11 @@ export default function Gallery({
                         : "border-white/15 opacity-55 hover:border-white/35 hover:opacity-100"
                   }`}
                 >
-                  <img
+                  <Image
                     src={item.after}
                     alt={item.title}
+                    fill
+                    sizes="96px"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-2 pb-1.5 pt-3 sm:px-2.5 sm:pb-2 sm:pt-4">

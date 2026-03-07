@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 
 export default function BeforeAfter() {
   const sectionRef = useRef(null);
@@ -109,21 +110,31 @@ export default function BeforeAfter() {
                 style={{ opacity: dirtyOpacity, filter: dirtyFilter }}
               >
                 {/* Mobile image takes max width to be huge, desktop uses height to constrain */}
-                <img
-                  src="/kırık-far-bmw.webp"
-                  alt="Kirli far"
-                  className="w-[120vw] max-w-none md:w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] md:h-[58vh]"
-                />
+                <div className="relative h-[52vh] w-[120vw] max-w-none md:h-[58vh] md:w-[78vw]">
+                  <Image
+                    src="/kırık-far-bmw.webp"
+                    alt="Kirli far"
+                    fill
+                    sizes="(max-width: 768px) 120vw, 78vw"
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)]"
+                    priority
+                  />
+                </div>
               </motion.div>
               <motion.div
                 className="flex items-center justify-center z-10"
                 style={{ opacity: cleanOpacity, filter: cleanFilter }}
               >
-                <img
-                  src="/temiz-far-bmw.webp"
-                  alt="Temiz far"
-                  className="w-[120vw] max-w-none md:w-auto object-contain drop-shadow-[0_20px_40px_rgba(255,255,255,0.15)] md:h-[58vh]"
-                />
+                <div className="relative h-[52vh] w-[120vw] max-w-none md:h-[58vh] md:w-[78vw]">
+                  <Image
+                    src="/temiz-far-bmw.webp"
+                    alt="Temiz far"
+                    fill
+                    sizes="(max-width: 768px) 120vw, 78vw"
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(255,255,255,0.15)]"
+                    priority
+                  />
+                </div>
               </motion.div>
             </motion.div>
 

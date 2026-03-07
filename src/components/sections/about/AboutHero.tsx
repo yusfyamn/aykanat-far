@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { premiumReveal, premiumTransition } from "@/lib/premiumMotion";
 
 export default function AboutHero() {
@@ -20,14 +21,15 @@ export default function AboutHero() {
       className="relative flex min-h-screen w-full items-center overflow-hidden bg-dark pt-20"
       style={{ minHeight: "100svh" }}
     >
-      <div
-        className="absolute inset-0"
-      >
-        <img
+      <div className="absolute inset-0">
+        <Image
           src="/hakkimizda-hero.jpeg"
           alt="Hakkımızda hero"
-          className="h-full w-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
           draggable={false}
+          priority
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-r from-black/98 via-black/84 to-black/26 md:from-black/95 md:via-black/72 md:to-black/18" />
