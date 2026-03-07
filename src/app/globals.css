@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/satoshi/Satoshi-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/satoshi/Satoshi-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/satoshi/Satoshi-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/satoshi/Satoshi-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: hsl(0, 0%, 3.9%);
+  height: 100%;
+  /* Support for dynamic viewport height on mobile */
+  height: 100dvh;
+}
+
+body {
+  background: hsl(0, 0%, 3.9%);
+  color: #ffffff;
+  font-family: 'Satoshi', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 3.9%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 0%, 9%);
+  border-radius: 3px;
+}
+
+::selection {
+  background: #2563EB;
+  color: #ffffff;
+}
+
+.contact-map-pin-wrap {
+  background: transparent;
+  border: 0;
+}
+
+.contact-map-pin-core {
+  position: absolute;
+  inset: 11px;
+  border-radius: 9999px;
+  background: #4f8eff;
+  box-shadow: 0 0 0 2px rgba(6, 14, 28, 0.6), 0 0 16px rgba(79, 142, 255, 0.45);
+}
+
+.contact-map-pin-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(79, 142, 255, 0.8);
+  animation: contact-pin-pulse 2.1s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.contact-map-pin-pulse-2 {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid rgba(137, 179, 255, 0.62);
+  animation: contact-pin-pulse 2.1s cubic-bezier(0.22, 0.61, 0.36, 1) infinite 0.55s;
+}
+
+@keyframes contact-pin-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.85;
+  }
+  72% {
+    transform: scale(1.55);
+    opacity: 0.12;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes page-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
