@@ -21,6 +21,13 @@ export default function Hero() {
   const lightOverlayRef = useRef<HTMLDivElement>(null);
   const [introReady, setIntroReady] = useState(false);
   const [isScrollLocked, setIsScrollLocked] = useState(true);
+  const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setMobileHeroHeight(window.innerHeight);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     const html = document.documentElement;
@@ -98,6 +105,13 @@ export default function Hero() {
 
   useEffect(() => {
     if (!isPreloaderDone) return;
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+    if (isMobile) {
+      setIntroReady(true);
+      setIsScrollLocked(false);
+      return;
+    }
 
     let ctx: gsap.Context | null = null;
     let introTl: gsap.core.Timeline | null = null;
@@ -312,7 +326,11 @@ export default function Hero() {
   }, [isPreloaderDone]);
 
   return (
-    <section ref={sectionRef} className="relative h-screen w-full bg-dark" style={{ height: "100dvh" }}>
+    <section
+      ref={sectionRef}
+      className="relative h-screen w-full bg-dark"
+      style={mobileHeroHeight ? { height: `${mobileHeroHeight}px` } : { height: "100dvh" }}
+    >
       <div className="h-full w-full max-w-none px-0">
         <div className="relative h-full overflow-hidden bg-dark">
           <div

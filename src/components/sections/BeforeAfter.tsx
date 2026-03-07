@@ -7,6 +7,7 @@ import Image from "next/image";
 export default function BeforeAfter() {
   const sectionRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [showClean, setShowClean] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 768px)");
@@ -15,6 +16,14 @@ export default function BeforeAfter() {
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const timer = window.setInterval(() => {
+      setShowClean((prev) => !prev);
+    }, 2600);
+    return () => window.clearInterval(timer);
+  }, [isMobile]);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -47,6 +56,82 @@ export default function BeforeAfter() {
 
   const dirtyFilter = useTransform(dirtyBlur, (v: number) => `blur(${v}px)`);
   const cleanFilter = useTransform(cleanBlur, (v: number) => `blur(${v}px)`);
+
+  if (isMobile) {
+    return (
+      <section className="relative overflow-hidden bg-white py-12" data-dark-section="true">
+        <div className="mx-auto w-full max-w-[1600px] px-4">
+          <div className="relative overflow-hidden rounded-[22px] bg-dark">
+            <div className="pointer-events-none absolute inset-0 z-20">
+              <div className="relative h-full px-5 py-6">
+                <div className="absolute right-5 top-6 max-w-[44vw] text-right">
+                  <h3 className="font-satoshi text-[clamp(1.3rem,6.8vw,2rem)] font-bold leading-[0.95] tracking-tighter text-white">
+                    {showClean ? (
+                      <>
+                        Mükemmellik
+                        <br />
+                        Bizim Altın
+                        <br />
+                        Standardımız.
+                      </>
+                    ) : (
+                      <>
+                        Bu Kadar
+                        <br />
+                        Hasarlı Bile
+                        <br />
+                        Olsa.
+                      </>
+                    )}
+                  </h3>
+                </div>
+                <div className="absolute bottom-6 left-5 max-w-[44vw] text-left">
+                  <h3 className="font-satoshi text-[clamp(1.3rem,6.8vw,2rem)] font-bold leading-[0.95] tracking-tighter text-white">
+                    {showClean ? (
+                      <>
+                        Sıfır Far
+                        <br />
+                        Maliyetinin
+                        <br />
+                        Çok Altında.
+                      </>
+                    ) : (
+                      <>
+                        Değişim Değil,
+                        <br />
+                        Onarım
+                        <br />
+                        Mümkün!
+                      </>
+                    )}
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative h-[66vh] min-h-[420px] w-full">
+              <motion.div
+                className="absolute inset-0"
+                initial={false}
+                animate={{ opacity: showClean ? 0 : 1 }}
+                transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Image src="/kırık-far-bmw.webp" alt="Kirli far" fill sizes="100vw" className="object-contain" priority />
+              </motion.div>
+              <motion.div
+                className="absolute inset-0"
+                initial={false}
+                animate={{ opacity: showClean ? 1 : 0 }}
+                transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Image src="/temiz-far-bmw.webp" alt="Temiz far" fill sizes="100vw" className="object-contain" priority />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={sectionRef} className="relative h-[185vh] md:h-[300vh]" data-dark-section="true">
