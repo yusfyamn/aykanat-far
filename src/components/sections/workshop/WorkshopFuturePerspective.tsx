@@ -27,7 +27,7 @@ export default function WorkshopFuturePerspective() {
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] border border-black/10 bg-black/[0.02] lg:h-full lg:min-h-[520px] lg:aspect-auto">
                 <div className="relative h-full w-full">
                   <Image
-                    src="/Sektörde-Gelecek-Perspektifi.webp"
+                    src="/sektorde-gelecek-perspektifi.webp"
                     alt="Sektörde gelecek perspektifi"
                     fill
                     className="object-cover"

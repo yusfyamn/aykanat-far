@@ -33,7 +33,7 @@ export default function WorkshopTextFlow() {
                   <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:h-full lg:min-h-[520px] lg:aspect-auto">
                     <div className="relative h-full w-full">
                       <Image
-                        src="/Far-Değişimi-Yerine-Onarımın Avantajları.webp"
+                        src="/far-degisim-onarim-avantajlari.webp"
                         alt="Far onarım atölyesi çalışma alanı"
                         fill
                         className="object-cover"
@@ -80,7 +80,7 @@ export default function WorkshopTextFlow() {
                   <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] lg:h-full lg:min-h-[520px] lg:aspect-auto">
                     <div className="relative h-full w-full">
                       <Image
-                        src="/Uzmanlık-ve-Ekipman-Gereksinimi.webp"
+                        src="/uzmanlik-ekipman-gereksinimi.webp"
                         alt="Uzmanlık ve ekipman gereksinimi"
                         fill
                         className="object-cover"
