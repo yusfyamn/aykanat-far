@@ -95,7 +95,7 @@ export default function PrivacyPolicyPage() {
           </div>
         </section>
         <div className="bg-white pt-0 md:pt-2">
-          <div className="mt-12 max-[1024px]:mt-6 max-md:-mt-px px-2.5 pb-2 sm:mt-14 sm:px-6 md:mt-16 md:px-4 md:pb-3">
+          <div className="pt-4 px-2.5 pb-2 sm:pt-5 sm:px-6 md:pt-16 md:px-4 md:pb-3">
             <Footer />
           </div>
         </div>

@@ -70,7 +70,7 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             onClick={() => setIsMenuOpen(false)}
-            className="fixed inset-0 z-40 bg-black/55 md:backdrop-blur-[6px]"
+            className="fixed inset-0 z-40 bg-black/55 max-md:bg-black/75 md:backdrop-blur-[6px]"
           />
         )}
       </AnimatePresence>
@@ -93,7 +93,7 @@ export default function Navbar() {
           paddingRight: "clamp(14px, 2.4vw, 30px)",
         }}
       >
-        <div className="relative flex items-center justify-between py-2 sm:py-2.5 md:py-3 lg:py-3.5 max-[430px]:py-3.5 max-[393px]:py-3.5">
+        <div className="relative flex items-center justify-between py-2.5 sm:py-3 md:py-3 lg:py-3.5">
           
           {/* Hamburger Menu (Mobile: Right, Desktop: Left) */}
           <motion.button
@@ -139,7 +139,7 @@ export default function Navbar() {
               width={160}
               height={32}
               priority
-              className="h-7 w-auto sm:h-8 md:h-7 lg:h-8 xl:h-9"
+              className="h-9 w-auto sm:h-8 md:h-7 lg:h-8 xl:h-9"
             />
           </MotionLink>
 
@@ -207,6 +207,27 @@ export default function Navbar() {
                       </span>
                     </MotionLink>
                   ))}
+                </div>
+                <div className="mt-5 grid grid-cols-2 gap-2 md:hidden">
+                  <PremiumAnchorButton
+                    href="https://www.google.com/maps/dir/?api=1&destination=%C4%B0%C3%A7erenk%C3%B6y%2C%20Huzur%20Hoca%20Cd%2054B%2C%2034638%20Ata%C5%9Fehir%2F%C4%B0stanbul"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    fullWidth
+                    className="border border-white/20 bg-white/10 text-white/85 hover:bg-white/15 px-3 py-2 text-[0.82rem]"
+                    iconClassName="bg-white/15 text-white/80"
+                  >
+                    Yol Tarifi
+                  </PremiumAnchorButton>
+                  <PremiumAnchorButton
+                    href="https://wa.me/905065166156"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    fullWidth
+                    className="px-3 py-2 text-[0.82rem]"
+                  >
+                    Bize Ulaşın
+                  </PremiumAnchorButton>
                 </div>
               </motion.div>
             </motion.div>

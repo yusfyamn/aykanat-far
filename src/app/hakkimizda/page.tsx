@@ -18,7 +18,7 @@ export default function About() {
       <div className="bg-white pt-0 md:pt-2">
         <AboutExpertise />
         <AboutCTA />
-        <div className="pt-12 max-[1024px]:pt-6 px-2.5 pb-2 sm:pt-14 sm:px-6 md:pt-16 md:px-4 md:pb-3">
+        <div className="pt-4 px-2.5 pb-2 sm:pt-5 sm:px-6 md:pt-16 md:px-4 md:pb-3">
           <Footer />
         </div>
       </div>
