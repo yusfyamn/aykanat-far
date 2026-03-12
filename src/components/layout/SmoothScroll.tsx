@@ -11,7 +11,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     const isTouchDevice =
       typeof window !== "undefined" &&
-      (window.innerWidth < 1024 ||
+      (window.innerWidth < 1025 ||
         window.matchMedia("(pointer: coarse)").matches ||
         "ontouchstart" in window ||
         navigator.maxTouchPoints > 0);

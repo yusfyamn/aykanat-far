@@ -1,10 +1,12 @@
+import dynamic from "next/dynamic";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import AboutHero from "@/components/sections/about/AboutHero";
 import AboutStatement from "@/components/sections/about/AboutStatement";
-import AboutStory from "@/components/sections/about/AboutStory";
-import AboutExpertise from "@/components/sections/about/AboutExpertise";
-import AboutCTA from "@/components/sections/about/AboutCTA";
+
+const AboutStory = dynamic(() => import("@/components/sections/about/AboutStory"), { ssr: false });
+const AboutExpertise = dynamic(() => import("@/components/sections/about/AboutExpertise"), { ssr: false });
+const AboutCTA = dynamic(() => import("@/components/sections/about/AboutCTA"), { ssr: false });
+const Footer = dynamic(() => import("@/components/layout/Footer"), { ssr: false });
 
 export default function About() {
   return (
@@ -16,7 +18,7 @@ export default function About() {
       <div className="bg-white pt-0 md:pt-2">
         <AboutExpertise />
         <AboutCTA />
-        <div className="mt-12 max-md:-mt-px px-2 pb-2 sm:mt-14 md:mt-16 md:px-4 md:pb-3">
+        <div className="pt-12 max-[1024px]:pt-6 px-2.5 pb-2 sm:pt-14 sm:px-6 md:pt-16 md:px-4 md:pb-3">
           <Footer />
         </div>
       </div>

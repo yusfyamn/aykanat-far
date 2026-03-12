@@ -13,6 +13,7 @@ interface Testimonial {
   name: string
   text: string
   initial: string
+  rating?: number
 }
 
 const testimonials: Testimonial[] = [
@@ -43,8 +44,9 @@ const testimonials: Testimonial[] = [
   },
   {
     name: "Emre Arslan",
-    text: "Atölye çok düzenli ve ekip çok ilgiliydi. Aracımı teslim aldığımda beklediğimden daha iyi görünüyordu.",
-    initial: "EA"
+    text: "Atölye biraz dağınıktı ama ekip ilgiliydi. Sonuçtan genel olarak memnun kaldım.",
+    initial: "EA",
+    rating: 4
   },
   {
     name: "Burak Şahin",
@@ -63,20 +65,21 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const maskedName = lastName
     ? `${firstName} ${lastName.charAt(0)}***`
     : firstName
+  const rating = Math.min(5, Math.max(1, testimonial.rating ?? 5))
 
   return (
     <Card className="flex h-full w-full flex-col p-5 sm:p-6">
       <div className="mb-4 flex-1">
-        <p className="text-sm font-medium leading-relaxed text-white/70 sm:text-base">{testimonial.text}</p>
+        <p className="text-[0.95rem] font-medium leading-relaxed text-white/70 sm:text-base">{testimonial.text}</p>
       </div>
       <div className="flex items-center">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-sm font-medium text-accent sm:h-11 sm:w-11">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 text-[0.95rem] font-medium text-accent sm:h-11 sm:w-11">
           {testimonial.initial}
         </div>
         <div className="flex items-center gap-2 pl-3">
-          <span className="text-sm font-semibold text-white sm:text-base">{maskedName}</span>
+          <span className="text-[0.95rem] font-semibold text-white sm:text-base">{maskedName}</span>
           <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(rating)].map((_, i) => (
               <svg
                 key={i}
                 className="h-3 w-3 text-accent sm:h-3.5 sm:w-3.5"
@@ -111,11 +114,11 @@ export default function Testimonials() {
           transition={premiumTransition(0.05, 0.84)}
           className="mb-10 flex flex-col items-center justify-center sm:mb-12 md:mb-16"
         >
-          <h2 className="mb-3 text-center text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
+          <h2 className="mb-3 text-center text-2xl font-bold tracking-tight sm:mb-4 sm:text-3xl md:text-4xl lg:text-5xl">
             Müşterilerimiz Ne Diyor?
           </h2>
           <p className="max-w-2xl text-center text-base text-white/60 sm:text-lg md:text-xl">
-            Binlerce memnun müşterimizden bazı yorumlar
+            Yüzlerce memnun müşterimizden bazı yorumlar
           </p>
         </motion.div>
 

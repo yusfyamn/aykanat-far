@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { premiumReveal, premiumTransition } from "@/lib/premiumMotion";
-import { usePreloader } from "@/context/PreloaderContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,13 +21,18 @@ export default function Hero() {
   const [introReady, setIntroReady] = useState(false);
   const [isScrollLocked, setIsScrollLocked] = useState(true);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
-  const [mobileHeroHeight, setMobileHeroHeight] = useState<number | null>(null);
+  const MOBILE_QUERY = "(max-width: 1024px), (pointer: coarse)";
 
-  useEffect(() => {
-    if (window.innerWidth < 768) {
-      setMobileHeroHeight(window.innerHeight);
-      setIsMobileViewport(true);
-    }
+  useLayoutEffect(() => {
+    const media = window.matchMedia(MOBILE_QUERY);
+    const sync = () => {
+      const isMobile = media.matches;
+      setIsMobileViewport(isMobile);
+      if (isMobile) setIsScrollLocked(false);
+    };
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
   }, []);
 
   useLayoutEffect(() => {
@@ -103,13 +107,10 @@ export default function Hero() {
     };
   }, [isScrollLocked]);
 
-  const { isPreloaderDone } = usePreloader();
-
   useEffect(() => {
-    if (!isPreloaderDone) return;
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-
-    if (isMobile) {
+    const isMobileNow = window.matchMedia("(max-width: 1024px)").matches;
+    if (isMobileViewport || isMobileNow) {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
       setIntroReady(true);
       setIsScrollLocked(false);
       if (lightOverlayRef.current) {
@@ -143,7 +144,7 @@ export default function Hero() {
           mission2: mission2Ref.current,
         };
         if (Object.values(els).some((el) => !el)) return;
-        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+        const isMobile = window.matchMedia(MOBILE_QUERY).matches;
         const zoomStrength = isMobile ? 3.9 : 6;
         const blurMax = isMobile ? 8 : 20;
         const pinLength = isMobile ? 1.15 : 1.5;
@@ -328,13 +329,26 @@ export default function Hero() {
       ctx?.revert();
       window.removeEventListener('resize', handleResize);
     };
-  }, [isPreloaderDone]);
+  }, [isMobileViewport]);
+
+  const heroReveal = isMobileViewport
+    ? {
+        initial: { opacity: 0, y: 10, filter: "blur(8px)" },
+        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+      }
+    : premiumReveal;
+  const heroTransition = isMobileViewport
+    ? (delay = 0) => ({
+        delay: delay + 0.06,
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1] as const,
+      })
+    : premiumTransition;
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen w-full bg-dark"
-      style={mobileHeroHeight ? { height: `${mobileHeroHeight}px` } : { height: "100dvh" }}
+      className="relative h-[100svh] w-full bg-dark md:h-screen"
     >
       <div className="h-full w-full max-w-none px-0">
         <div className="relative h-full overflow-hidden bg-dark">
@@ -351,7 +365,7 @@ export default function Hero() {
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/hero-mobile.png"
+              src="/hero-mobile.webp"
               alt="Luxury car headlight"
               className="block h-full w-full object-cover object-center md:hidden"
             />
@@ -365,41 +379,41 @@ export default function Hero() {
             <div className="mt-[clamp(64px,10vh,132px)] flex items-start justify-end">
               {/* Top Right Heading (Mobile: Top Right, Desktop: Top Right) */}
               <motion.h1
-                className="max-w-[11ch] pb-2 text-right text-[clamp(1.95rem,6.3vw,5.8rem)] font-medium leading-[0.9] tracking-tighter text-white md:mr-[clamp(10px,2.2vw,44px)] md:max-w-none md:pb-0"
+                className="max-w-[11ch] pb-3 text-right text-[clamp(2.05rem,5.6vw,4.6rem)] font-medium leading-[1.02] tracking-tighter text-white md:mr-[clamp(10px,2.2vw,44px)] md:max-w-none md:pb-1 md:text-[clamp(1.6rem,3.6vw,3.2rem)] 2xl:text-[clamp(1.7rem,3.4vw,3.8rem)]"
                 style={{ fontFamily: "Satoshi, sans-serif" }}
-                initial={premiumReveal.initial}
-                animate={introReady ? premiumReveal.animate : premiumReveal.initial}
-                transition={premiumTransition(-0.12, 1.1)}
+                initial={heroReveal.initial}
+                animate={introReady ? heroReveal.animate : heroReveal.initial}
+                transition={heroTransition(-0.12, 1.1)}
               >
                 Onarım Odaklı<br />Çözüm
               </motion.h1>
             </div>
             {/* Bottom section layout container */}
-            <div className="mb-[clamp(38px,5.2vh,90px)] flex flex-col justify-end gap-3 sm:gap-4 md:items-start md:gap-5 md:flex-col">
+            <div className="mb-[clamp(38px,5.2vh,90px)] flex flex-col justify-end gap-2 sm:gap-3 md:items-start md:gap-4 md:flex-col max-[1024px]:-translate-y-6">
               
               {/* Bottom Left Heading */}
               <motion.div
                 className="w-full text-left md:order-1 md:ml-[clamp(10px,2.8vw,56px)] md:max-w-none md:text-left"
-                initial={premiumReveal.initial}
-                animate={introReady ? premiumReveal.animate : premiumReveal.initial}
-                transition={premiumTransition(-0.08, 1.08)}
+                initial={heroReveal.initial}
+                animate={introReady ? heroReveal.animate : heroReveal.initial}
+                transition={heroTransition(-0.08, 1.08)}
               >
                 <h2
-                  className="pr-0 pb-2 text-[clamp(1.95rem,6.3vw,5.8rem)] font-medium leading-[0.9] tracking-tighter text-white md:pr-2 md:pb-0"
+                  className="pr-0 pb-2 text-[clamp(2.05rem,5.6vw,4.6rem)] font-medium leading-[1.02] tracking-tighter text-white md:pr-2 md:pb-1 md:text-[clamp(1.6rem,3.6vw,3.2rem)] 2xl:text-[clamp(1.7rem,3.4vw,3.8rem)]"
                   style={{ fontFamily: "Satoshi, sans-serif" }}
                 >
-                  Geceye<br />İmza Netlik
+                  Her Marka<br />İçin Far Onarım
                 </h2>
               </motion.div>
 
               {/* Description (Mobile: Bottom Left, Desktop: Bottom Left under heading) */}
               <motion.div
                 className="max-w-[300px] text-left md:order-2 md:ml-[clamp(10px,2.8vw,56px)] md:max-w-[min(88vw,620px)] md:text-left"
-                initial={premiumReveal.initial}
-                animate={introReady ? premiumReveal.animate : premiumReveal.initial}
-                transition={premiumTransition(-0.02, 1.08)}
+                initial={heroReveal.initial}
+                animate={introReady ? heroReveal.animate : heroReveal.initial}
+                transition={heroTransition(-0.02, 1.08)}
               >
-                <p className="mb-4 font-satoshi text-[clamp(0.95rem,1.55vw,1.9rem)] leading-relaxed text-white/78 md:mb-5 md:text-white/92">
+                <p className="mb-2 font-satoshi text-[clamp(1.02rem,2.2vw,1.9rem)] leading-relaxed text-white/78 md:mb-4 md:text-[clamp(0.95rem,1.6vw,1.45rem)] md:text-white/92">
                   <span className="block">Çünkü biz biliyoruz ki; doğru aydınlatma,</span>
                   <span className="block">güvenli bir yolculuğun başlangıcıdır.</span>
                 </p>
@@ -410,22 +424,22 @@ export default function Hero() {
           <motion.div
             ref={hintRef}
             className="pointer-events-none absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2 md:bottom-8 lg:bottom-10"
-            initial={premiumReveal.initial}
-            animate={introReady ? premiumReveal.animate : premiumReveal.initial}
-            transition={premiumTransition(0.08, 0.92)}
+            initial={heroReveal.initial}
+            animate={introReady ? heroReveal.animate : heroReveal.initial}
+            transition={heroTransition(0.08, 0.92)}
           >
-            <span className="font-inter text-[10px] uppercase tracking-[0.2em] text-white/30">Kaydır</span>
+            <span className="font-inter text-[11px] uppercase tracking-[0.2em] text-white/30">Kaydır</span>
             <div className="flex h-8 w-5 justify-center rounded-full border border-white/20 pt-1.5">
               <div className="h-1 w-1 animate-bounce rounded-full bg-accent" />
             </div>
           </motion.div>
 
-          <div ref={whiteRef} className="absolute inset-0 z-20 bg-white opacity-0 will-change-[opacity]" />
+          <div ref={whiteRef} className="hero-flash absolute inset-0 z-20 bg-white opacity-0 will-change-[opacity]" />
 
           {/* Light reveal overlay - dark overlay that fades out to reveal the headlight */}
           <div
             ref={lightOverlayRef}
-            className="absolute inset-0 z-16 pointer-events-none"
+            className="hero-light absolute inset-0 z-16 pointer-events-none"
             style={
               {
                 opacity: isMobileViewport ? 0 : 1,
@@ -437,7 +451,7 @@ export default function Hero() {
           />
 
           <div
-            className="absolute inset-0 z-[17] pointer-events-none"
+            className="hero-screen absolute inset-0 z-[17] pointer-events-none"
             style={
               {
                 opacity: isMobileViewport ? 0 : 0.12,
@@ -452,7 +466,7 @@ export default function Hero() {
           {/* Mission text on white background */}
           <div
             ref={missionRef}
-            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-[clamp(16px,3.2vw,56px)] py-[clamp(42px,7vh,96px)]"
+            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24 py-[clamp(42px,7vh,96px)]"
             style={{ opacity: 1 }}
           >
             <div className="w-full max-w-[1600px] space-y-8 md:space-y-10">

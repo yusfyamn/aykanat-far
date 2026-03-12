@@ -44,7 +44,7 @@ export default function FAQ() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 1023px)");
+    const media = window.matchMedia("(max-width: 1024px), (pointer: coarse)");
     const sync = () => setIsMobile(media.matches);
     sync();
     media.addEventListener("change", sync);
@@ -72,10 +72,10 @@ export default function FAQ() {
               <p className="text-[13px] font-semibold uppercase tracking-[0.2em] text-black">
                 S.S.S
               </p>
-              <h2 className="mt-3 text-4xl font-semibold tracking-tight text-black sm:mt-4 sm:text-5xl md:text-5xl lg:text-6xl">
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-black sm:mt-4 sm:text-4xl md:text-4xl lg:text-5xl">
                 Sıkça Sorulan Sorular
               </h2>
-              <p className="mt-4 max-w-[46ch] text-sm leading-relaxed text-black sm:mt-5 sm:text-base md:text-lg">
+              <p className="mt-4 max-w-[46ch] text-[0.95rem] leading-relaxed text-black sm:mt-5 sm:text-base md:text-lg">
                 Restorasyon süreci, süreler ve kalite standardı hakkında en sık aldığımız sorular.
               </p>
             </motion.div>
@@ -97,10 +97,10 @@ export default function FAQ() {
                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                     className="flex w-full items-start gap-3 px-4 py-4 text-left sm:gap-4 sm:px-5 sm:py-5 md:px-7 md:py-6"
                   >
-                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-black/20 text-[10px] font-semibold tracking-[0.1em] text-black sm:h-7 sm:w-7 sm:text-[11px] sm:tracking-[0.12em]">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-black/20 text-[11px] font-semibold tracking-[0.1em] text-black sm:h-7 sm:w-7 sm:text-[11px] sm:tracking-[0.12em]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 pr-2 text-sm font-semibold leading-snug text-black sm:pr-4 sm:text-base md:text-lg">
+                    <span className="flex-1 pr-2 text-[0.95rem] font-semibold leading-snug text-black sm:pr-4 sm:text-base md:text-lg">
                       {faq.question}
                     </span>
                     <motion.svg
@@ -129,7 +129,7 @@ export default function FAQ() {
                         }}
                         className="overflow-hidden"
                       >
-                        <div className="border-t border-black/10 px-4 pb-4 pt-3 text-sm leading-relaxed text-black sm:px-5 sm:pb-5 sm:pt-4 md:px-7 md:pb-6 md:text-base">
+                        <div className="border-t border-black/10 px-4 pb-4 pt-3 text-[0.95rem] leading-relaxed text-black sm:px-5 sm:pb-5 sm:pt-4 md:px-7 md:pb-6 md:text-base">
                           {faq.answer}
                         </div>
                       </motion.div>

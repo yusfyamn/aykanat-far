@@ -12,11 +12,11 @@ export default function TermsPage() {
             <h1 className="text-3xl font-semibold tracking-tight text-[#101010] sm:text-4xl md:text-5xl">
               Kullanım Koşulları
             </h1>
-            <p className="mt-5 max-w-[80ch] text-sm leading-relaxed text-black/62 sm:text-base">
+            <p className="mt-5 max-w-[80ch] text-[0.95rem] leading-relaxed text-black/62 sm:text-base">
               Son güncelleme: 7 Mart 2026
             </p>
 
-            <div className="mt-10 space-y-8 text-[15px] leading-relaxed text-black/74 sm:text-base md:text-lg">
+            <div className="mt-10 space-y-8 text-[0.98rem] leading-relaxed text-black/74 sm:text-base md:text-lg">
               <div>
                 <h2 className="text-xl font-semibold tracking-tight text-black sm:text-2xl">1. Kapsam ve Kabul</h2>
                 <p className="mt-3">
@@ -91,7 +91,7 @@ export default function TermsPage() {
           </div>
         </section>
         <div className="bg-white pt-0 md:pt-2">
-          <div className="mt-12 max-md:-mt-px px-2 pb-2 sm:mt-14 md:mt-16 md:px-4 md:pb-3">
+          <div className="mt-12 max-[1024px]:mt-6 max-md:-mt-px px-2.5 pb-2 sm:mt-14 sm:px-6 md:mt-16 md:px-4 md:pb-3">
             <Footer />
           </div>
         </div>

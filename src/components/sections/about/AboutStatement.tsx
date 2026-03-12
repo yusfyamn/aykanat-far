@@ -19,10 +19,10 @@ export default function AboutStatement() {
 
   return (
     <section ref={sectionRef} className="bg-white pb-14 pt-24 text-[#111111] sm:pb-16 sm:pt-28 md:pb-20 md:pt-32">
-      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-12 xl:px-14">
-        <div className="space-y-9 md:space-y-11">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
+        <div className="space-y-8 md:space-y-10">
           <motion.p
-            className="text-[clamp(1.3rem,2.55vw,2.85rem)] font-medium leading-[1.22] tracking-[-0.02em] text-[#111111]"
+            className="text-[clamp(1.18rem,2.6vw,2.5rem)] font-medium leading-[1.28] tracking-[-0.013em] text-[#111111]"
             style={{ fontFamily: "Satoshi, sans-serif" }}
             initial={{ opacity: 0.34, filter: "blur(14px)" }}
             animate={
@@ -36,7 +36,7 @@ export default function AboutStatement() {
           </motion.p>
 
           <motion.p
-            className="text-[clamp(1.3rem,2.55vw,2.85rem)] font-medium leading-[1.22] tracking-[-0.02em] text-[#111111]"
+            className="text-[clamp(1.18rem,2.6vw,2.5rem)] font-medium leading-[1.28] tracking-[-0.013em] text-[#111111]"
             style={{ fontFamily: "Satoshi, sans-serif" }}
             initial={{ opacity: 0.34, filter: "blur(14px)" }}
             animate={

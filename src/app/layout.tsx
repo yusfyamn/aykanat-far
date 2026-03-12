@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   description: "Master-level headlight restoration services",
 };
 
-import Preloader from "@/components/ui/Preloader";
-import { PreloaderProvider } from "@/context/PreloaderContext";
-
 export default function RootLayout({
   children,
 }: {
@@ -30,10 +27,7 @@ export default function RootLayout({
         }} />
       </head>
       <body className="antialiased bg-dark">
-        <PreloaderProvider>
-          <Preloader />
-          {children}
-        </PreloaderProvider>
+        {children}
         <WhatsAppButton />
       </body>
     </html>

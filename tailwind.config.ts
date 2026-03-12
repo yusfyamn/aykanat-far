@@ -7,6 +7,13 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: { raw: "(min-width: 1025px) and (pointer: fine)" },
+      lg: { raw: "(min-width: 1280px) and (pointer: fine)" },
+      xl: { raw: "(min-width: 1440px) and (pointer: fine)" },
+      "2xl": { raw: "(min-width: 1536px) and (pointer: fine)" },
+    },
     extend: {
       fontFamily: {
         sans: ["Satoshi", "sans-serif"],

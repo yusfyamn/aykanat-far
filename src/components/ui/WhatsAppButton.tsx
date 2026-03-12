@@ -1,15 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const WHATSAPP_URL =
-  "https://wa.me/905551234567?text=Merhaba%2C%20far%20restorasyonu%20icin%20bilgi%20almak%20istiyorum.";
+  "https://wa.me/905065166156?text=Merhaba%2C%20far%20restorasyonu%20icin%20bilgi%20almak%20istiyorum.";
 
 export default function WhatsAppButton() {
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+
+    let observer: IntersectionObserver | null = null;
+    let mutation: MutationObserver | null = null;
+
+    const attachObserver = (element: HTMLElement) => {
+      if (observer) observer.disconnect();
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsFooterVisible(entry.isIntersecting);
+        },
+        { threshold: 0.12 }
+      );
+      observer.observe(element);
+    };
+
+    const footer = document.getElementById("contact");
+    if (footer) {
+      attachObserver(footer);
+    } else {
+      mutation = new MutationObserver(() => {
+        const nextFooter = document.getElementById("contact");
+        if (nextFooter) {
+          attachObserver(nextFooter);
+          mutation?.disconnect();
+        }
+      });
+      mutation.observe(document.body, { childList: true, subtree: true });
+    }
+
+    return () => {
+      observer?.disconnect();
+      mutation?.disconnect();
+    };
+  }, []);
+
   return (
-    <div
+    <motion.div
       className="fixed right-6 z-[60] sm:right-8"
-      style={{ bottom: "max(1.5rem, calc(env(safe-area-inset-bottom) + 0.5rem))" }}
+      initial={false}
+      animate={
+        isFooterVisible
+          ? { opacity: 0, y: 18, scale: 0.92 }
+          : { opacity: 1, y: 0, scale: 1 }
+      }
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      aria-hidden={isFooterVisible}
+      style={{
+        bottom: "max(1.5rem, calc(env(safe-area-inset-bottom) + 0.5rem))",
+        pointerEvents: isFooterVisible ? "none" : "auto",
+      }}
     >
       <div className="relative h-[68px] w-[68px]">
         <span
@@ -50,6 +101,6 @@ export default function WhatsAppButton() {
           </svg>
         </motion.a>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 import {
   PREMIUM_VIEWPORT_AMOUNT,
@@ -28,32 +28,18 @@ const audiences = [
 
 export default function AboutExpertise() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const isInView = useInView(sectionRef, {
     once: true,
     margin: PREMIUM_VIEWPORT_MARGIN,
     amount: PREMIUM_VIEWPORT_AMOUNT,
   });
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], [-26, 26]);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <section
       ref={sectionRef}
       className="relative -mt-px bg-white pb-14 pt-16 text-[#101010] sm:pb-16 sm:pt-20 md:pb-20 md:pt-24"
     >
-      <div className="w-full px-3 md:px-4">
-        <div className="mx-auto w-full max-w-[1480px]">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <motion.div
           variants={premiumStagger(0.12, 0.1)}
           initial="hidden"
@@ -66,12 +52,12 @@ export default function AboutExpertise() {
             className="relative h-full"
           >
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] border border-black/12 bg-black/[0.04] lg:h-full lg:min-h-[520px] lg:aspect-auto">
-              <motion.div className="relative h-full w-full" style={isMobile ? undefined : { y: imageY }}>
+              <motion.div className="relative h-full w-full">
                 <Image
                   src="/hakkimizda.jpeg"
                   alt="AYKANAT FAR atölyesi"
                   fill
-                  className="object-cover"
+                  className="object-cover object-center md:object-[12%_50%]"
                   sizes="(max-width: 1024px) 100vw, 44vw"
                 />
               </motion.div>
@@ -82,14 +68,14 @@ export default function AboutExpertise() {
             <motion.p
               variants={premiumVariants}
               transition={premiumTransition(0.02, 0.82)}
-              className="text-[11px] font-semibold uppercase tracking-[0.22em] text-black/42 sm:text-xs"
+              className="text-[12px] font-semibold uppercase tracking-[0.22em] text-black/42 sm:text-xs"
             >
               Yaklaşımımız
             </motion.p>
             <motion.h2
               variants={premiumVariants}
               transition={premiumTransition(0.06, 0.82)}
-              className="mt-3 max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]"
+              className="mt-3 max-w-[17ch] pb-[0.1em] text-2xl font-semibold leading-[1.08] tracking-[-0.02em] sm:text-3xl md:text-4xl lg:text-5xl"
             >
               Teknik doğruluk ve net kullanıcı deneyimi.
             </motion.h2>
@@ -144,14 +130,13 @@ export default function AboutExpertise() {
                 <h4 className="text-lg font-semibold tracking-tight sm:text-xl">
                   {item.title}
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-black/66 sm:text-base">
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-black/66 sm:text-base">
                   {item.description}
                 </p>
               </motion.div>
             ))}
           </div>
         </motion.div>
-        </div>
       </div>
     </section>
   );

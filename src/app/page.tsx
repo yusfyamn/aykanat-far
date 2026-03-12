@@ -2,6 +2,7 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import HomeMobileStatement from "@/components/sections/HomeMobileStatement";
 import BeforeAfter from "@/components/sections/BeforeAfter";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import Gallery from "@/components/sections/Gallery";
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <Navbar />
         <Hero />
+        <HomeMobileStatement />
         <BeforeAfter />
         <ProcessTimeline />
         <div className="bg-white pt-0 md:pt-2">
@@ -26,7 +28,7 @@ export default function Home() {
           </div>
           <FAQ />
           <AboutCTA />
-          <div className="mt-12 max-md:-mt-px px-2 pb-2 sm:mt-14 md:mt-16 md:px-4 md:pb-3">
+          <div className="mt-12 max-[1024px]:mt-6 max-md:-mt-px px-2.5 pb-2 sm:mt-14 sm:px-6 md:mt-16 md:px-4 md:pb-3">
             <Footer />
           </div>
         </div>

@@ -55,7 +55,8 @@ export default function DarkContactMap({ className }: DarkContactMapProps) {
   }, [])
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768)
+    const onResize = () =>
+      setIsMobile(window.matchMedia("(max-width: 1024px), (pointer: coarse)").matches)
     onResize()
     window.addEventListener("resize", onResize)
     return () => window.removeEventListener("resize", onResize)

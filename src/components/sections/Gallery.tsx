@@ -102,10 +102,10 @@ export default function Gallery({
           transition={premiumTransition(0.05, 0.86)}
           className="mb-10 text-center sm:mb-12 md:mb-16"
         >
-          <h2 className={`mb-3 text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl ${plain ? "text-[#111111]" : "text-white"}`}>
+          <h2 className={`mb-3 pb-[0.12em] text-[clamp(1.7rem,7vw,2.1rem)] font-bold leading-[1.08] tracking-tight sm:mb-4 sm:text-[2.1rem] md:text-4xl lg:text-5xl ${plain ? "text-[#111111]" : "text-white"}`}>
             Öncesi / Sonrası Çalışmalarımız
           </h2>
-          <p className={`mx-auto max-w-2xl text-base sm:text-lg md:text-xl ${plain ? "text-black/60" : "text-white/60"}`}>
+          <p className={`mx-auto max-w-2xl text-[1.02rem] sm:text-lg md:text-xl ${plain ? "text-black/60" : "text-white/60"}`}>
             Kaydırarak önce ve sonrayı karşılaştırın
           </p>
         </motion.div>
@@ -120,14 +120,14 @@ export default function Gallery({
           <motion.div
             variants={premiumVariants}
             transition={premiumTransition(0.12, 0.9)}
-            className="relative flex-1 w-full"
+            className="relative flex-1 w-full lg:max-w-[900px] xl:max-w-[1000px] 2xl:max-w-[1120px]"
           >
             {/* iPad Frame */}
             <div className="relative rounded-2xl border border-[#60A5FA]/45 bg-[#0f1626] p-2 sm:p-3">
               {/* Screen */}
               <div
                 ref={sliderAreaRef}
-                className="relative overflow-hidden rounded-xl bg-black aspect-[1.22/1] sm:aspect-[16/9]"
+                className="relative overflow-hidden rounded-xl bg-black aspect-[1.22/1] sm:aspect-[16/9] lg:aspect-[21/10] 2xl:aspect-[16/9]"
               >
                 {/* Content */}
                 <div className="relative w-full h-full select-none">
@@ -208,10 +208,10 @@ export default function Gallery({
                   </div>
 
                   {/* Labels */}
-                  <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white md:backdrop-blur-md sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
+                  <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.8rem] font-medium text-white md:backdrop-blur-md sm:left-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
                     Önce
                   </div>
-                  <div className="absolute right-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-white md:backdrop-blur-md sm:right-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
+                  <div className="absolute right-3 top-3 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.8rem] font-medium text-white md:backdrop-blur-md sm:right-4 sm:top-4 sm:px-4 sm:py-2 sm:text-sm">
                     Sonra
                   </div>
 
@@ -220,7 +220,7 @@ export default function Gallery({
                 {/* Info overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
                   <h3 className="mb-1 text-lg font-semibold text-white sm:text-xl">{activeItem.title}</h3>
-                  <p className="text-sm text-white/75">{activeItem.description}</p>
+                  <p className="text-[0.95rem] text-white/75">{activeItem.description}</p>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function Gallery({
           <motion.div
             variants={premiumVariants}
             transition={premiumTransition(0.2, 0.78)}
-            className="w-full overflow-x-auto pb-1 lg:ml-1 lg:w-auto lg:overflow-visible lg:pb-0"
+            className="flex w-full justify-center overflow-x-auto pb-1 lg:ml-1 lg:w-auto lg:justify-start lg:overflow-visible lg:pb-0"
           >
             <div className="flex w-max gap-2.5 px-1 lg:w-auto lg:flex-col lg:gap-3 lg:px-0">
               {galleryItems.map((item, index) => (
@@ -257,7 +257,7 @@ export default function Gallery({
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent px-2 pb-1.5 pt-3 sm:px-2.5 sm:pb-2 sm:pt-4">
-                    <span className="block truncate text-[9px] font-medium leading-tight text-white/90 sm:text-[10px]">
+                    <span className="block truncate text-[10px] font-medium leading-tight text-white/90 sm:text-[11px]">
                       {item.title}
                     </span>
                   </div>

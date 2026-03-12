@@ -49,6 +49,18 @@ html {
   font-size: 16px;
 }
 
+@media (max-width: 640px) {
+  html {
+    font-size: 16.5px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  html {
+    font-size: 15px;
+  }
+}
+
 body {
   background: hsl(0, 0%, 3.9%);
   color: #ffffff;
@@ -124,19 +136,10 @@ img {
   }
 }
 
-.page-enter {
-  animation: page-enter 0.62s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes page-enter {
-  0% {
-    opacity: 0;
-    transform: translateY(18px);
-    filter: blur(8px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+@media (max-width: 1024px), (pointer: coarse) {
+  .hero-flash,
+  .hero-light,
+  .hero-screen {
+    display: none !important;
   }
 }

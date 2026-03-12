@@ -17,7 +17,7 @@ export default function WorkshopTextFlow() {
     <section ref={sectionRef} className="relative max-md:-mt-px bg-white pb-16 pt-12 text-white sm:pb-20 sm:pt-16 md:pb-24 md:pt-20">
       <div className="w-full px-3 md:px-4">
         <div className="space-y-8 md:space-y-10">
-          <div className="rounded-[20px] bg-surface px-5 py-12 sm:px-6 sm:py-14 md:rounded-[24px] md:px-10 md:py-[4.5rem] lg:px-14 lg:py-20 xl:px-16">
+          <div className="rounded-[20px] bg-surface px-4 py-12 sm:px-6 sm:py-14 md:rounded-[24px] md:px-10 md:py-[4.5rem] lg:px-16 lg:py-20 xl:px-20 2xl:px-24">
             <div className="mx-auto w-full max-w-[1480px]">
               <motion.div
                 variants={premiumStagger(0.12, 0.1)}
@@ -49,8 +49,8 @@ export default function WorkshopTextFlow() {
                     transition={premiumTransition(0, 0.82)}
                     className="flex h-full flex-col space-y-5"
                   >
-                    <p className="text-[11px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">Atölye Yaklaşımı</p>
-                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]">
+                    <p className="text-[12px] uppercase tracking-[0.22em] text-white/40 sm:text-xs">Atölye Yaklaşımı</p>
+                    <h2 className="max-w-[17ch] pb-[0.1em] text-2xl font-semibold leading-[1.08] tracking-[-0.02em] sm:text-3xl md:text-4xl lg:text-5xl">
                       Far Değişimi Yerine Onarımın Avantajları
                     </h2>
                     <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-white/76 sm:mt-7 sm:text-lg md:text-[1.24rem]">
@@ -96,7 +96,7 @@ export default function WorkshopTextFlow() {
                     transition={premiumTransition(0.1, 0.82)}
                     className="flex h-full flex-col space-y-5"
                   >
-                    <h2 className="max-w-[17ch] pb-[0.1em] text-[clamp(2rem,9vw,3.6rem)] font-semibold leading-[1.03] tracking-[-0.03em]">
+                    <h2 className="max-w-[17ch] pb-[0.1em] text-2xl font-semibold leading-[1.08] tracking-[-0.02em] sm:text-3xl md:text-4xl lg:text-5xl">
                       Uzmanlık ve Ekipman Gereksinimi
                     </h2>
                     <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-white/76 sm:mt-7 sm:text-lg md:text-[1.24rem]">
