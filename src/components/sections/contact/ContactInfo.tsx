@@ -2,7 +2,7 @@
 
 import type { COBEOptions } from "cobe"
 import dynamic from "next/dynamic"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 const DarkContactMap = dynamic(() => import("@/components/ui/DarkContactMap"), {
   ssr: false,
